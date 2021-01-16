@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "725137875184",
+    "project_id": "oniapp-874fd",
+    "storage_bucket": "oniapp-874fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725137875184:android:6c566c18fb137769eea235",
+        "android_client_info": {
+          "package_name": "com.saharat.oni"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "725137875184-7oneq8t6ne3av7cdemf0576oq5cr8btq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6AQK-wU4a4ZCeYomgH8TdKsOyatITslY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "725137875184-7oneq8t6ne3av7cdemf0576oq5cr8btq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
