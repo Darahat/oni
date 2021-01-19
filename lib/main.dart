@@ -14,6 +14,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:oni/widget/personalize.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +30,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  PermissionStatus _permissionStatus;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   final FirebaseMessaging _messaging = FirebaseMessaging();
   @override
@@ -38,6 +40,15 @@ class _MyAppState extends State<MyApp> {
     // _messaging.getToken().then((token) {
     //   print(token);
     // });
+    _askActivityPermission();
+  }
+
+  void _askActivityPermission() async {
+    if (await Permission.activityRecognition.request().isGranted) {
+      _permissionStatus = await Permission.activityRecognition.status;
+
+      setState(() {});
+    }
   }
 
   @override

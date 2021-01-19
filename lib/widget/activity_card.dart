@@ -17,7 +17,7 @@ class ActivityCard extends StatefulWidget {
 class _ActivityCardState extends State<ActivityCard> {
   Stream<StepCount> _stepCountStream;
   Stream<PedestrianStatus> _pedestrianStatusStream;
-  String _status = '?', _steps = '?';
+  String _status = '', _steps = '0';
 
   @override
   void initState() {
@@ -50,7 +50,7 @@ class _ActivityCardState extends State<ActivityCard> {
   void onStepCountError(error) {
     print('onStepCountError: $error');
     setState(() {
-      _steps = 'Step Count not available';
+      _steps = '0';
     });
   }
 
