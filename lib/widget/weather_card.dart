@@ -59,6 +59,8 @@ class _FirstCardState extends State<FirstCard> {
     return Container(
         child: InkWell(
             child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
                 margin: EdgeInsets.all(10),
                 child: Container(
                   padding: EdgeInsets.only(
@@ -66,7 +68,6 @@ class _FirstCardState extends State<FirstCard> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text('Get Weather'),
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[

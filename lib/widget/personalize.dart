@@ -15,7 +15,11 @@ class _PersonalizeState extends State<Personalize> {
   Widget build(BuildContext context) {
     return BaseWidget(builder: (context, sizingInformation) {
       return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text('Personalize Oni'),
+        ),
         body: SafeArea(
             child: Column(
           children: [Text('Personalize me')],

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oni/components/draggableScrollableNav.dart';
 import 'package:oni/widget/activity_card.dart';
-import 'package:oni/widget/personalize.dart';
 import 'package:oni/widget/weather_card.dart';
 import 'package:weather/weather.dart';
 import 'package:geolocator/geolocator.dart';
@@ -116,9 +115,7 @@ class _OniHomeState extends State<OniHome> {
                 itemCount: _data.length,
                 itemBuilder: (context, position) {
                   return Column(
-                    children: [
-                      FirstCard(data: _data),
-                    ],
+                    children: [FirstCard(data: _data), ActivityCard()],
                   );
                 }),
             DraggableScrollableNav()

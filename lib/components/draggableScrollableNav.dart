@@ -2,9 +2,9 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+
 import 'package:oni/provider/google_sign_in.dart';
-import 'package:oni/widget/personalize.dart';
+
 import 'package:provider/provider.dart';
 
 class DraggableScrollableNav extends StatefulWidget {
