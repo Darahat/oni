@@ -4,7 +4,6 @@
  * Use of this source code is governed by a MIT-style license that can be
  * found in the LICENSE file.
  */
-import 'dart:io';
 
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +14,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:oni/widget/personalize.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,14 +35,12 @@ class _MyAppState extends State<MyApp> {
   final FirebaseMessaging _messaging = FirebaseMessaging();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    // _messaging.getToken().then((token) {
-    //   print(token);
-    // });
+
     _askActivityPermission();
   }
 
+// For permission from user
   void _askActivityPermission() async {
     if (await Permission.activityRecognition.request().isGranted) {
       _permissionStatus = await Permission.activityRecognition.status;
@@ -53,6 +51,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    // customise status bar color
+    FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
     return MaterialApp(
       builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
@@ -60,7 +60,6 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.dark,
         backgroundColor: Colors.transparent,
       ),
-      // home: HomePage(),
       home: SignUpPage(),
       initialRoute: '/signup',
       routes: {

@@ -1,3 +1,4 @@
+//Weather update card calling from pages.Home.dart
 import 'package:flutter/material.dart';
 import 'package:oni/ui/base_widget.dart';
 import 'dart:async';
@@ -25,6 +26,7 @@ class _ActivityCardState extends State<ActivityCard> {
     initPlatformState();
   }
 
+//get count step
   void onStepCount(StepCount event) {
     print(event);
     setState(() {
@@ -32,6 +34,7 @@ class _ActivityCardState extends State<ActivityCard> {
     });
   }
 
+// get activity status change
   void onPedestrianStatusChanged(PedestrianStatus event) {
     print(event);
     setState(() {
@@ -39,6 +42,7 @@ class _ActivityCardState extends State<ActivityCard> {
     });
   }
 
+//if activity status get any error or not available
   void onPedestrianStatusError(error) {
     print('onPedestrianStatusError: $error');
     setState(() {
@@ -47,6 +51,7 @@ class _ActivityCardState extends State<ActivityCard> {
     print(_status);
   }
 
+//if  step count  get any error or not available
   void onStepCountError(error) {
     print('onStepCountError: $error');
     setState(() {
@@ -75,6 +80,7 @@ class _ActivityCardState extends State<ActivityCard> {
     double caloriBurnt = (.032 * steps);
 
     print(caloriBurnt);
+    // BaseWidget help to get screen size and resize every component of it according to device sreen size
     return BaseWidget(
         builder: (context, sizingInfo) => Container(
             child: InkWell(
@@ -100,12 +106,6 @@ class _ActivityCardState extends State<ActivityCard> {
                                 )
                               ],
                             ),
-
-                            // title
-
-                            //card body
-// 0.032*steps
-
                             Container(
                               padding: EdgeInsets.all(5.0),
                               child: Row(
@@ -154,18 +154,6 @@ class _ActivityCardState extends State<ActivityCard> {
                                             color: Colors.green,
                                             size: 25,
                                           ),
-                                          // Center(
-                                          //   child: Text(
-                                          //     //_status value first letter capitalize
-                                          //     "${_status[0].toUpperCase()}${_status.substring(1)}",
-                                          //     style: _status == 'walking' ||
-                                          //             _status == 'stopped'
-                                          //         ? TextStyle(fontSize: 12)
-                                          //         : TextStyle(
-                                          //             fontSize: 12,
-                                          //             color: Colors.blue),
-                                          //   ),
-                                          // )
                                         ]),
                                       ),
                                       Container(

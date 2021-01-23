@@ -1,3 +1,4 @@
+// bottom draggable nav
 import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,57 +18,6 @@ class _DraggableScrollableNavState extends State<DraggableScrollableNav> {
   // DBHelper dbHelper;
   void initState() {
     super.initState();
-  }
-
-  Route _createAnimatedRoute(page) {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => page,
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        var begin = Offset(1.0, 0.0);
-        var end = Offset.zero;
-        var curve = Curves.easeIn;
-
-        var tween =
-            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-        return SlideTransition(
-          position: animation.drive(tween),
-          child: child,
-        );
-      },
-    );
-  }
-
-  Widget _buildPopupDialog(BuildContext context) {
-    return new AlertDialog(
-      title: const Text('Popup example'),
-      content: Stepper(type: StepperType.horizontal, steps: [
-        Step(
-            title: Text("What is your relegion"),
-            content: Column(
-              children: [Text('data')],
-            )),
-        Step(
-            title: Text("What is your Proffession"),
-            content: Column(
-              children: [Text('data')],
-            )),
-        Step(
-            title: Text("What is your relegion"),
-            content: Column(
-              children: [Text('data')],
-            ))
-      ]),
-      actions: <Widget>[
-        new FlatButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          textColor: Theme.of(context).primaryColor,
-          child: const Text('Close'),
-        ),
-      ],
-    );
   }
 
 //  const Cubic(0.35, 0.91, 0.33, 0.97)
@@ -103,8 +53,6 @@ class _DraggableScrollableNavState extends State<DraggableScrollableNav> {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      //                     Navigator.of(context)
-                                      // .push(_createAnimatedRoute(new Personalize()));},
                                       Navigator.pushNamed(
                                           context, '/personalize');
                                     },
@@ -128,10 +76,7 @@ class _DraggableScrollableNavState extends State<DraggableScrollableNav> {
                               Column(
                                 children: [
                                   InkWell(
-                                    onTap: () {
-                                      //                     Navigator.of(context)
-                                      // .push(_createAnimatedRoute(new Personalize()));},
-                                    },
+                                    onTap: () {},
                                     child: Container(
                                       margin: EdgeInsets.fromLTRB(10, 5, 20, 5),
                                       child: Padding(
@@ -176,18 +121,6 @@ class _DraggableScrollableNavState extends State<DraggableScrollableNav> {
                                   ),
                                 ],
                               ),
-                              // Row(
-                              //   children: [
-                              //     InkWell(
-                              //       child: Card(
-                              //         child: Padding(
-                              //           padding: EdgeInsets.all(10),
-                              //           child: Text('Log Out'),
-                              //         ),
-                              //       ),
-                              //     )
-                              //   ],
-                              // )
                             ],
                           ))
                     ],

@@ -7,8 +7,8 @@ class ResponsiveContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // BaseWidget help to get screen size and resize every component of it according to device sreen size
     return BaseWidget(builder: (context, sizingInformation) {
-      // return
       return OniHome();
     });
   }

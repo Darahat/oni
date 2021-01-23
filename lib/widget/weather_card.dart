@@ -1,31 +1,28 @@
-//rain possiblity
-//temp
-//air speed
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:oni/ui/base_widget.dart';
 import 'package:weather/weather.dart';
-import 'package:geolocator/geolocator.dart';
 
 class FirstCard extends StatefulWidget {
   FirstCard({Key key, this.data}) : super(key: key);
+  // getting weather data from pages.Home.dart
   final List<Weather> data;
   @override
   _FirstCardState createState() => _FirstCardState();
 }
 
+// Capitalizing Weather update String
 extension StringExtension on String {
   String capitalize() {
     return "${this[0].toUpperCase()}${this.substring(1)}";
   }
 }
 
+// Showing Greeting
 greeting() {
   var hour = DateTime.now().hour;
   if (hour < 12) {
     return Text(
-      'Morning',
+      'Good Morning',
       style: GoogleFonts.lato(
         fontSize: 15,
         fontWeight: FontWeight.w400,
@@ -35,7 +32,7 @@ greeting() {
   }
   if (hour < 17) {
     return Text(
-      'Afternoon',
+      'Good Afternoon',
       style: GoogleFonts.lato(
         fontSize: 15,
         fontWeight: FontWeight.w400,
@@ -44,7 +41,7 @@ greeting() {
     );
   }
   return Text(
-    'Evening',
+    'Good Evening',
     style: GoogleFonts.lato(
       fontSize: 15,
       fontWeight: FontWeight.w400,
@@ -130,59 +127,6 @@ class _FirstCardState extends State<FirstCard> {
                 ))));
   }
 }
-//rain possiblity
-//temp
-//air speed
-//  Position _currentPosition;
-//   String key = '856822fd8e22db5e1ba48c0e7d69844a';
-//   WeatherFactory ws;
-//   List<Weather> _data = [];
-//   double lat = 0.0;
-//   double lon = 0.0;
-//   @override
-//   void initState() {
-//     super.initState();
-//     // _determinePosition();
-//     ws = new WeatherFactory(key);
-//     _getCurrentLocation();
-//   }
-
-//   _getCurrentLocation() {
-//     // final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
-
-//     Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
-//         .then((Position position) {
-//       setState(() {
-//         _currentPosition = position;
-//         if (_currentPosition.latitude != 0.0) {
-//           return queryWeather(24.747149, 90.420273);
-//         } else {}
-//       });
-//     }).catchError((e) {
-//       print('aaaaaaaaaa$e');
-//     });
-//   }
-
-//   void queryWeather(lati, long) async {
-//     print(
-//         "this is my position hurray .....................................................$lati $long");
-// // fetchApI().then((){
-//     /// Removes keyboard
-//     FocusScope.of(context).requestFocus(FocusNode());
-
-//     setState(() {});
-//     try {
-//       await ws
-//           .currentWeatherByLocation(
-//               _currentPosition.latitude, _currentPosition.longitude)
-//           .then((weather) {
-//         setState(() {
-//           _data = [weather];
-//         });
-//       });
-//     } catch (e) {
-//       print('aaaaaaaaaa$e');
-//     }
 
 //     // weather.cloudiness;
 //     // weather.humidity;
