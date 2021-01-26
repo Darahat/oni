@@ -1,6 +1,6 @@
 //Weather update card calling from pages.Home.dart
 import 'package:flutter/material.dart';
-import 'package:oni/ui/base_widget.dart';
+import 'package:oni/makeResponsiveUI/base_widget.dart';
 import 'dart:async';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:pedometer/pedometer.dart';

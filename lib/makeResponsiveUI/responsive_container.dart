@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oni/ui/base_widget.dart';
+import 'package:oni/makeResponsiveUI/base_widget.dart';
 import 'package:oni/pages/pages.Home.dart';
 
 class ResponsiveContainer extends StatelessWidget {

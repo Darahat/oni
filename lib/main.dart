@@ -8,11 +8,11 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:oni/pages/pages.Home.dart';
-import 'package:oni/pages/signup_page.dart';
+import 'package:oni/pages/pages.signup.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:oni/widget/personalize.dart';
+import 'package:oni/pages/pages.personalize.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 

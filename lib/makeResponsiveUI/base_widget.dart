@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:oni/ui/sizing_information.dart';
-import 'package:oni/utils/ui_utils.dart';
+import 'package:oni/makeResponsiveUI/sizing_information.dart';
+import 'package:oni/makeResponsiveUI/utils/ui_utils.dart';
 
 class BaseWidget extends StatelessWidget {
   final Widget Function(

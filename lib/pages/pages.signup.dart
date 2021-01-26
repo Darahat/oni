@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:oni/provider/google_sign_in.dart';
-import 'package:oni/widget/signup_background_painter.dart';
-import 'package:oni/widget/sign_up_widget.dart';
+import 'package:oni/componentsOfPages/Signup/signup_background_painter.dart';
+import 'package:oni/componentsOfPages/Signup/sign_up_widget.dart';
 import 'package:provider/provider.dart';
-import 'package:oni/ui/views/responsive_container.dart';
+import 'package:oni/makeResponsiveUI/responsive_container.dart';
 
 class SignUpPage extends StatelessWidget {
   @override

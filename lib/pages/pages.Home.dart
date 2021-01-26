@@ -1,8 +1,8 @@
 //Home page
 import 'package:flutter/material.dart';
-import 'package:oni/components/draggableScrollableNav.dart';
-import 'package:oni/widget/activity_card.dart';
-import 'package:oni/widget/weather_card.dart';
+import 'package:oni/componentsOfPages/homewidgets/draggableScrollableNav.dart';
+import 'package:oni/componentsOfPages/homewidgets/activity_card.dart';
+import 'package:oni/componentsOfPages/homewidgets/weather_card.dart';
 import 'package:weather/weather.dart';
 import 'package:geolocator/geolocator.dart';
 
