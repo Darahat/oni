@@ -69,7 +69,13 @@ class _PersonalizeState extends State<Personalize> {
                 ),
               ],
             ))),
-            Text('Select Your Personalization Card'),
+            Container(
+              margin: EdgeInsets.only(top: 50),
+              child: Text(
+                'Personalization Card',
+                style: TextStyle(fontSize: 25),
+              ),
+            ),
             PersonalizationCards()
           ],
         )),

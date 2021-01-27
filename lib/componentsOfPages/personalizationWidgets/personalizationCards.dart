@@ -29,7 +29,7 @@ class _PersonalizationCardsState extends State<PersonalizationCards> {
     }
   }
 
-  int _currentValue = 10;
+  int _currentValue = 20;
 
   Widget ageCard(BuildContext context) {
     return new Center(
@@ -53,31 +53,33 @@ class _PersonalizationCardsState extends State<PersonalizationCards> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Container(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width / 1,
-              height: 300,
-              child: Swiper(
-                itemCount: 4,
-                itemBuilder: (BuildContext context, int index) {
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Card(
-                      child: personalizeCard(index),
-                    ),
-                  );
-                },
-                itemWidth: width / 2,
-                itemHeight: height / 2,
-                viewportFraction: 0.65,
-                scale: 0.8,
-              ),
-            )
-          ],
-        ),
-      ),
+      margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+      child: Card(
+          color: Colors.white,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  height: 300,
+                  child: Swiper(
+                    itemCount: 4,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Card(
+                          child: personalizeCard(index),
+                        ),
+                      );
+                    },
+                    itemWidth: width / 2,
+                    itemHeight: height / 2,
+                    viewportFraction: 0.65,
+                    scale: 0.8,
+                  ),
+                )
+              ],
+            ),
+          )),
     );
   }
 }
