@@ -70,7 +70,7 @@ class _PersonalizeState extends State<Personalize> {
               ],
             ))),
             Text('Select Your Personalization Card'),
-            PersonalizationCards()
+            PersonalizationCards(),
           ],
         )),
       );

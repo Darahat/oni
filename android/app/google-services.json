@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "725137875184",
+    "firebase_url": "https://oniapp-874fd-default-rtdb.firebaseio.com",
     "project_id": "oniapp-874fd",
     "storage_bucket": "oniapp-874fd.appspot.com"
   },
@@ -13,6 +14,22 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "725137875184-g7c61571369t1hm4vgd0v6fn9sksi32f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saharat.oni",
+            "certificate_hash": "a9d608c0261601a1552552e535bc55fa6324eb00"
+          }
+        },
+        {
+          "client_id": "725137875184-sf10bklt78mu5o8n1ivtfqqcno3iovr2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saharat.oni",
+            "certificate_hash": "97a7838a05b79539d7f010262beff633209fd0ac"
+          }
+        },
         {
           "client_id": "725137875184-7oneq8t6ne3av7cdemf0576oq5cr8btq.apps.googleusercontent.com",
           "client_type": 3
