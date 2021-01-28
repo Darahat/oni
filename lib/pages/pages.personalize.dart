@@ -40,15 +40,9 @@ class _PersonalizeState extends State<Personalize> {
               children: <Widget>[
                 Column(
                   children: [
-                    //  DottedBorder(
-                    //     radius: const Radius.circular(8.0),
-                    //     color: Colors.red,
-                    //     strokeWidth: 1,
-                    //     child: Container(
-                    //         child:
                     new Container(
-                        width: 100.0,
-                        height: 100.0,
+                        width: width * .2,
+                        height: width * .2,
                         decoration: new BoxDecoration(
                             shape: BoxShape.circle,
                             image: new DecorationImage(
@@ -57,9 +51,8 @@ class _PersonalizeState extends State<Personalize> {
                                 user.photoURL,
                               ),
                             ))),
-
+                    SizedBox(height: height * 0.03),
                     Container(
-                      margin: EdgeInsets.all(10),
                       child: Text(
                         '${user.displayName ?? 'default value'}',
                         style: TextStyle(color: Colors.white, fontSize: 20.0),
