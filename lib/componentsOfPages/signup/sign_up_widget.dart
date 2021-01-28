@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:oni/componentsOfPages/Signup/signup_background_painter.dart';
-import 'package:oni/componentsOfPages/Signup/google_signup_button_widget.dart';
+import 'package:oni/componentsOfPages/signup/signup_background_painter.dart';
+import 'package:oni/componentsOfPages/signup/google_signup_button_widget.dart';
 
 class SignUpWidget extends StatelessWidget {
   @override
