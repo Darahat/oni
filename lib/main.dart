@@ -15,10 +15,31 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:oni/pages/pages.personalize.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import 'package:workmanager/workmanager.dart';
+import 'package:oni/BackgroundTasks/PeriodicWeatherCheck.dart';
+
+const PeriodicWeatherCheckTaskName = "PeriodicWeatherCheck";
+
+void callbackDispatcher() {
+  Workmanager.executeTask((task, inputData) {
+    switch(task){
+      case PeriodicWeatherCheckTaskName:
+        PeriodicWeatherCheck().checkWeather(true);
+        break;
+    }
+    return Future.value(true);
+  });
+}
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  Workmanager.initialize(
+      callbackDispatcher,
+      isInDebugMode: false,
+  );
+  Workmanager.cancelAll();
+  Workmanager.registerPeriodicTask("2", PeriodicWeatherCheckTaskName, initialDelay: Duration(seconds: 30));
   runApp(MyApp());
 }
 
