@@ -40,22 +40,25 @@ class _PersonalizeState extends State<Personalize> {
               children: <Widget>[
                 Column(
                   children: [
-                    new Container(
-                        width: width * .2,
-                        height: width * .2,
-                        decoration: new BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: new DecorationImage(
-                              fit: BoxFit.fill,
-                              image: NetworkImage(
-                                user.photoURL,
-                              ),
-                            ))),
-                    SizedBox(height: height * 0.03),
+                    CircleAvatar(
+                      radius: height * .05,
+                      backgroundColor: Colors.blue,
+                      child: CircleAvatar(
+                        radius: height * .045,
+                        backgroundImage: NetworkImage(
+                          user.photoURL,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: height * 0.02),
                     Container(
                       child: Text(
                         '${user.displayName ?? 'default value'}',
-                        style: TextStyle(color: Colors.white, fontSize: 20.0),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                            fontSize: 15.0,
+                            fontFamily: 'Montserrat'),
                       ),
                     )
                   ],
@@ -63,10 +66,13 @@ class _PersonalizeState extends State<Personalize> {
               ],
             ))),
             Container(
-              margin: EdgeInsets.only(top: 50),
+              margin: EdgeInsets.fromLTRB(0, height * .05, 0, 10),
               child: Text(
                 'Personalization Card',
-                style: TextStyle(fontSize: 25),
+                style: TextStyle(
+                    fontFamily: 'Lato',
+                    fontSize: 20,
+                    fontWeight: FontWeight.w300),
               ),
             ),
             PersonalizationCards()

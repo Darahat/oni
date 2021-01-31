@@ -1,5 +1,6 @@
 //Home page
 import 'package:flutter/material.dart';
+import 'package:oni/componentsOfPages/homewidgets/bodyStrucCard.dart';
 import 'package:oni/componentsOfPages/homewidgets/draggableScrollableNav.dart';
 import 'package:oni/componentsOfPages/homewidgets/activity_card.dart';
 import 'package:oni/componentsOfPages/homewidgets/weather_card.dart';
@@ -107,7 +108,11 @@ class _OniHomeState extends State<OniHome> {
                 itemCount: _data.length,
                 itemBuilder: (context, position) {
                   return Column(
-                    children: [FirstCard(data: _data), ActivityCard()],
+                    children: [
+                      FirstCard(data: _data),
+                      ActivityCard(),
+                      BodyStrucInfo()
+                    ],
                   );
                 }),
             DraggableScrollableNav()

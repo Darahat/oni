@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+ 
   weather: ^1.2.4
   geolocator: ^6.1.13
   firebase_auth: ^0.18.3
@@ -48,7 +49,8 @@ dependencies:
   dotted_border: ^1.0.7
   numberpicker: ^1.3.0
   workmanager: ^0.2.3
-
+  fl_chart: ^0.12.2
+  
 ev_dependencies:
   flutter_test:
     sdk: flutter
@@ -71,6 +73,26 @@ flutter:
     - assets/icons/logout.png
     - assets/icons/user.png
     - assets/icons/plus.png
+    - assets/icons/femalesymbol.png
+    - assets/icons/mensymbol.png
+    - assets/icons/boy.png
+    - assets/icons/girl.png
+    - assets/icons/middleageman.png
+    - assets/icons/middleagewoman.png
+    - assets/icons/man.png
+    - assets/icons/woman.png
+    - assets/icons/teenageboy.png
+    - assets/icons/teenagegirl.png
+    - assets/icons/grandfather.png
+    - assets/icons/grandmother.png
+    - assets/icons/transgender.png
+    - assets/icons/islam.png
+    - assets/icons/hebrew.png
+    - assets/icons/buddhism.png
+    - assets/icons/cross.png
+    - assets/icons/shikh.png
+    - assets/icons/hindu.png
+
   #   - packages/baseflow_plugin_template/poweredByBaseflow.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

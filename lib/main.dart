@@ -22,9 +22,9 @@ const PeriodicWeatherCheckTaskName = "PeriodicWeatherCheck";
 
 void callbackDispatcher() {
   Workmanager.executeTask((task, inputData) {
-    switch(task){
+    switch (task) {
       case PeriodicWeatherCheckTaskName:
-        PeriodicWeatherCheck().checkWeather(true);
+        // PeriodicWeatherCheck().checkWeather(true);
         break;
     }
     return Future.value(true);
@@ -35,11 +35,12 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Workmanager.initialize(
-      callbackDispatcher,
-      isInDebugMode: false,
+    callbackDispatcher,
+    isInDebugMode: false,
   );
   Workmanager.cancelAll();
-  Workmanager.registerPeriodicTask("2", PeriodicWeatherCheckTaskName, initialDelay: Duration(seconds: 30));
+  Workmanager.registerPeriodicTask("2", PeriodicWeatherCheckTaskName,
+      initialDelay: Duration(seconds: 30));
   runApp(MyApp());
 }
 
