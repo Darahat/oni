@@ -1,122 +1,114 @@
 //Home page
+import 'dart:async';
+import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:oni/componentsOfPages/homewidgets/bodyStrucCard.dart';
-import 'package:oni/componentsOfPages/homewidgets/draggableScrollableNav.dart';
+import 'package:oni/componentsOfPages/homewidgets/draggabaleNav.dart';
 import 'package:oni/componentsOfPages/homewidgets/activity_card.dart';
 import 'package:oni/componentsOfPages/homewidgets/weather_card.dart';
+import 'package:oni/pages/pages.personalize.dart';
 import 'package:weather/weather.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
-enum AppState { NOT_DOWNLOADED, DOWNLOADING, FINISHED_DOWNLOADING }
+import 'package:flutter_icons/flutter_icons.dart';
+
+import 'package:oni/provider/google_sign_in.dart';
+
+import 'package:provider/provider.dart';
 
 class OniHome extends StatefulWidget {
-  OniHome({Key key}) : super(key: key);
+  OniHome({
+    Key key,
+  }) : super(key: key);
 
   @override
   _OniHomeState createState() => _OniHomeState();
 }
 
 class _OniHomeState extends State<OniHome> {
-  Position _currentPosition;
-  String key = '856822fd8e22db5e1ba48c0e7d69844a';
-  WeatherFactory ws;
-  List<Weather> _data = [];
-  AppState _state = AppState.NOT_DOWNLOADED;
-  double lat;
-  double lon;
+  String title, content;
+  //Subscribing for post details
+  StreamSubscription<QuerySnapshot> subscription;
+  List<DocumentSnapshot> snapshot;
+  CollectionReference collectionReference =
+      FirebaseFirestore.instance.collection("Users");
+
+  bool todoSwitchValue = false;
+  bool stepcountSwitchValue = false;
+  bool fitnessSwitchValue = false;
+  bool weatherSwitchValue = false;
 
   @override
-  void initState() {
-    super.initState();
-    // _determinePosition();
-    ws = new WeatherFactory(key);
-    _getCurrentLocation();
-  }
+  conditioningHomeCards() {
+    // if (widget.weatherSwitchValue == true) {
+    //   return
+    // }
 
-  void queryForecast() async {
-    /// Removes keyboard
-    FocusScope.of(context).requestFocus(FocusNode());
-    setState(() {
-      _state = AppState.DOWNLOADING;
-    });
-// get 5 days forecast data
-    List<Weather> forecasts = await ws.fiveDayForecastByLocation(
-        _currentPosition.latitude, _currentPosition.longitude);
-
-    setState(() {
-      _data = forecasts;
-      _state = AppState.FINISHED_DOWNLOADING;
-    });
-  }
-
-// get location (lat & long)
-  _getCurrentLocation() {
-    Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
-        .then((Position position) {
-      print("/////////////////////////////// $position");
-      setState(() {
-        _currentPosition = position;
-        queryWeather(_currentPosition.latitude, _currentPosition.longitude);
-      });
-    }).catchError((e) {
-      print('aaaaaaaaaa$e');
-    });
-  }
-
-// geting weather (parameter is latitude and longitude)
-  void queryWeather(lati, long) async {
-    FocusScope.of(context).requestFocus(FocusNode());
-
-    setState(() {
-      _state = AppState.DOWNLOADING;
-    });
-    try {
-      await ws
-          .currentWeatherByLocation(
-              _currentPosition.latitude, _currentPosition.longitude)
-          .then((weather) {
-        setState(() {
-          _data = [weather];
-          _state = AppState.FINISHED_DOWNLOADING;
-        });
-      });
-    } catch (e) {
-      print('aaaaaaaaaa$e');
+    if (stepcountSwitchValue == true) {
+      return ActivityCard();
+    } else {
+      return;
     }
-
-    // weather.cloudiness;
-    // weather.humidity;
-    // weather.rainLast3Hours;
-    // weather.sunrise;
-    // weather.tempMax;
-    // weather.tempMin;
-    // weather.temperature;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: Text('Oni'),
+      bottomNavigationBar: ConvexAppBar(
+        color: Colors.white,
+        backgroundColor: Colors.green,
+        items: [
+          TabItem(icon: Icons.home, title: 'Home'),
+          TabItem(icon: Ionicons.ios_person, title: 'Profile'),
+          // TabItem(icon: Icons.mic, title: 'Speak'),
+          TabItem(icon: Icons.message, title: 'Message'),
+          TabItem(icon: Icons.logout, title: 'Logout'),
+        ],
+        initialActiveIndex: 0, //optional, default as 0
+        onTap: (int i) {
+          if (i == 1) {
+            return Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Personalize(
+                      todoSwitchValue: todoSwitchValue,
+                      stepcountSwitchValue: stepcountSwitchValue,
+                      fitnessSwitchValue: fitnessSwitchValue,
+                      weatherSwitchValue: weatherSwitchValue),
+                ));
+          } else if (i == 4) {
+//               final provider =StreamProvider(
+//   create: (_) => FirebaseAuth.instance.onAuthStateChanged,
+// ),
+//                   StreamProvider.of<GoogleSignInProvider>(context, listen: false);
+//               provider.logout();
+          }
+        },
+      ),
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black, //change your color here
         ),
-        body: Stack(
-          children: [
-            ListView.builder(
-                itemCount: _data.length,
-                itemBuilder: (context, position) {
-                  return Column(
-                    children: [
-                      FirstCard(data: _data),
-                      ActivityCard(),
-                      BodyStrucInfo()
-                    ],
-                  );
-                }),
-            DraggableScrollableNav()
-          ],
-        ));
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text('Oni'),
+      ),
+      body: ListView.builder(
+          itemCount: 1,
+          itemBuilder: (context, position) {
+            return Column(
+              // children: [FirstCard(), ActivityCard()],
+              children: [
+                WeatherCard(),
+                ActivityCard(),
+                // conditioningHomeCards(),
+                BodyStrucInfo()
+              ],
+            );
+          }),
+    );
   }
 }

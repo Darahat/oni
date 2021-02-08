@@ -7,7 +7,8 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:oni/componentsOfPages/personalizationWidgets/personalizingFunctions.dart';
-import 'package:oni/componentsOfPages/personalizationWidgets/BMIChartlineTitles.dart';
+
+import 'package:oni/makeResponsiveUI/base_widget.dart';
 
 class PersonalizationCards extends StatefulWidget {
   PersonalizationCards({Key key}) : super(key: key);
@@ -123,168 +124,12 @@ class _PersonalizationCardsState extends State<PersonalizationCards> {
               ),
             )),
           ),
-          genderSelection(context)
         ],
       ),
     );
   }
 
-  Widget genderSelection(BuildContext context) {
-    double totalHeight = MediaQuery.of(context).size.height;
-    double totalWidth = MediaQuery.of(context).size.width;
-    return Container(
-        child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        GestureDetector(
-          onTap: () => setState(() => _selectedGender = 'Male'),
-          child: Container(
-              // margin: EdgeInsets.fromLTRB(10, 10, right, bottom),
-              margin: EdgeInsets.all(totalWidth * .035),
-              child: CircleAvatar(
-                radius: totalHeight * .033,
-                backgroundColor: _selectedGender == 'Male'
-                    ? Color(0xfffffde7)
-                    : Colors.transparent,
-                child: CircleAvatar(
-                  radius: totalHeight * .02,
-                  backgroundColor: Colors.transparent,
-                  child: Image.asset(
-                    'assets/icons/mensymbol.png',
-                  ),
-                ),
-              )),
-        ),
-        GestureDetector(
-            onTap: () => setState(() => _selectedGender = 'Female'),
-            child: Container(
-                // margin: EdgeInsets.fromLTRB(10, 10, right, bottom),
-                margin: EdgeInsets.all(totalWidth * .035),
-                child: CircleAvatar(
-                  radius: totalHeight * .033,
-                  backgroundColor: _selectedGender == 'Female'
-                      ? Color(0xfffffde7)
-                      : Colors.transparent,
-                  child: CircleAvatar(
-                    radius: totalHeight * .02,
-                    backgroundColor: Colors.transparent,
-                    child: Image.asset(
-                      'assets/icons/femalesymbol.png',
-                    ),
-                  ),
-                ))),
-        GestureDetector(
-            onTap: () => setState(() => _selectedGender = 'Transgender'),
-            child: Container(
-                // margin: EdgeInsets.fromLTRB(10, 10, right, bottom),
-                margin: EdgeInsets.all(totalWidth * .035),
-                child: CircleAvatar(
-                  radius: totalHeight * .033,
-                  backgroundColor: _selectedGender == 'Transgender'
-                      ? Color(0xfffffde7)
-                      : Colors.transparent,
-                  child: CircleAvatar(
-                    radius: totalHeight * .02,
-                    backgroundColor: Colors.transparent,
-                    child: Image.asset('assets/icons/transgender.png'),
-                  ),
-                ))),
-      ],
-    ));
-  }
-
-  Widget heightWeightCard(BuildContext context) {
-    double totalHeight = MediaQuery.of(context).size.height;
-    double totalWidth = MediaQuery.of(context).size.width;
-    double heightSquare = (_selectedHeight * 0.3048) * 2;
-    double calculatedBMI = _selectedWeight / heightSquare;
-    _bmi = calculatedBMI;
-    return new Center(
-        child: new Column(children: <Widget>[
-      Card(
-          child: Container(
-              padding: EdgeInsets.all(5),
-              child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Text(
-                  "Body Mass Index(BMI)",
-                  style: TextStyle(fontSize: 15, fontFamily: 'Poppins'),
-                ),
-              ]))),
-      new Column(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.all(5),
-            margin: EdgeInsets.only(right: 10),
-            height: totalHeight * .25,
-            child: LineChart(
-              LineChartData(
-                  backgroundColor: Colors.black,
-                  minY: 0,
-                  maxY: 150,
-                  minX: 10,
-                  maxX: 32,
-                  titlesData: LineTitles.getTitleData(),
-                  borderData: FlBorderData(
-                    show: true,
-                    border:
-                        Border.all(color: const Color(0xff37434d), width: 1),
-                  ),
-                  gridData: FlGridData(
-                    show: true,
-                    getDrawingHorizontalLine: (value) {
-                      return FlLine(
-                        color: const Color(0xff37434d),
-                      );
-                    },
-                  ),
-                  lineBarsData: [
-                    LineChartBarData(
-                        spots: [
-                          FlSpot(10, 0),
-                          FlSpot(calculatedBMI, _selectedWeight)
-                        ],
-                        isCurved: true,
-                        barWidth: 2,
-                        colors: gradientColor,
-                        belowBarData: BarAreaData(
-                          show: true,
-                          colors: gradientColor
-                              .map((color) => color.withOpacity(.3))
-                              .toList(),
-                        ))
-                  ]),
-            ),
-          ),
-          Text('Height(Foot)'),
-          Slider(
-            value: _selectedHeight,
-            min: 3,
-            max: 10,
-            divisions: 70,
-            label: _selectedHeight.toStringAsFixed(1),
-            onChanged: (double value) {
-              setState(() {
-                _selectedHeight = value;
-              });
-            },
-          ),
-          Text('Weight(KG)'),
-          Slider(
-            value: _selectedWeight,
-            min: 30,
-            max: 150,
-            divisions: 100,
-            label: _selectedWeight.round().toString(),
-            onChanged: (double value) {
-              setState(() {
-                _selectedWeight = value;
-              });
-            },
-          )
-        ],
-      ),
-    ]));
-  }
+  Widget heightWeightCard(BuildContext context) {}
 
   // religion picker
   int relegionIndex = 0;
@@ -506,62 +351,74 @@ class _PersonalizationCardsState extends State<PersonalizationCards> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    return Column(
-      children: [
-        Container(
-          child: SingleChildScrollView(
-            // converted it to column to fit save button
-            // otherwise i have to pass the data to parent class
-            // which takes time :3
-            child: Column(
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width / 1,
-                  height: height * .53,
-                  child: Swiper(
-                    itemCount: 4,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Card(
-                          child: personalizeCard(index),
-                        ),
-                      );
-                    },
-                    itemWidth: width / 2,
-                    itemHeight: height / 2,
-                    viewportFraction: 0.95,
-                    scale: 1,
-                  ),
-                ),
-                SizedBox(height: height * 0.05),
-                Container(
-                  height: height * 0.05,
-                  width: width * 0.3,
-                  child: FlatButton(
-                    color: Colors.white,
-                    onPressed: () {
-                      saveData();
-                      Navigator.pop(context);
-                    },
-                    child: Center(
-                      child: Text(
-                        "Save",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontFamily: 'Roboto',
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
+    return BaseWidget(builder: (context, sizingInformation) {
+      return Scaffold(
+          appBar: AppBar(
+            iconTheme: IconThemeData(
+              color: Colors.black, //change your color here
+            ),
+            centerTitle: true,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            title: Text('Oni'),
+          ),
+          body: Column(
+            children: [
+              Container(
+                child: SingleChildScrollView(
+                  // converted it to column to fit save button
+                  // otherwise i have to pass the data to parent class
+                  // which takes time :3
+                  child: Column(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width / 1,
+                        height: height * .53,
+                        child: Swiper(
+                          itemCount: 4,
+                          itemBuilder: (BuildContext context, int index) {
+                            return ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Card(
+                                child: personalizeCard(index),
+                              ),
+                            );
+                          },
+                          itemWidth: width / 2,
+                          itemHeight: height / 2,
+                          viewportFraction: 0.95,
+                          scale: 1,
                         ),
                       ),
-                    ),
+                      SizedBox(height: height * 0.05),
+                      Container(
+                        height: height * 0.05,
+                        width: width * 0.3,
+                        child: FlatButton(
+                          color: Colors.white,
+                          onPressed: () {
+                            saveData();
+                            Navigator.pop(context);
+                          },
+                          child: Center(
+                            child: Text(
+                              "Save",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: 'Roboto',
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
+              ),
+            ],
+          ));
+    });
   }
 }

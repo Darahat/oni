@@ -23,7 +23,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
- 
+  
+  
+  convex_bottom_bar: ^2.6.0
   weather: ^1.2.4
   geolocator: ^6.1.13
   firebase_auth: ^0.18.3
@@ -50,7 +52,7 @@ dependencies:
   numberpicker: ^1.3.0
   workmanager: ^0.2.3
   fl_chart: ^0.12.2
-  
+  flutter_icons: ^1.1.0
 ev_dependencies:
   flutter_test:
     sdk: flutter
@@ -92,6 +94,7 @@ flutter:
     - assets/icons/cross.png
     - assets/icons/shikh.png
     - assets/icons/hindu.png
+    - assets/images/onilogo.png
 
   #   - packages/baseflow_plugin_template/poweredByBaseflow.png
 

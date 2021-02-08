@@ -74,6 +74,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     // customise status bar color
+
     FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
     return MaterialApp(
       builder: DevicePreview.appBuilder,
@@ -87,7 +88,6 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/signup': (context) => SignUpPage(),
         '/home': (context) => OniHome(),
-        '/personalize': (context) => Personalize()
       },
     );
   }
