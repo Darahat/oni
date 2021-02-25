@@ -97,7 +97,7 @@ class _BodyStrucInfoState extends State<BodyStrucInfo> {
                                   height: height * 0.02,
                                 ),
                                 Text(
-                                  '${snapshot.data['weight'].toString()} kg',
+                                  '${snapshot.data['weight'].toStringAsFixed(1)} kg',
                                   style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontSize: 16,
