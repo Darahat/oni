@@ -14,11 +14,18 @@ class BMIDataCollection extends StatefulWidget {
 
 class _BMIDataCollectionState extends State<BMIDataCollection> {
   double _bmi = 0.0;
-  int _selectedAge = 14;
+  int _selectedAge;
   double _selectedWeight = 56.0;
-
+  NumberPicker integerNumberPicker;
+  NumberPicker decimalNumberPicker;
   double _selectedHeight = 4.0;
   String _selectedGender = 'Male';
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUserData();
+  }
+
   void saveData() async {
     try {
       await FirebaseFirestore.instance
@@ -36,6 +43,30 @@ class _BMIDataCollectionState extends State<BMIDataCollection> {
     }
   }
 
+  final userCollection = FirebaseFirestore.instance.collection('users');
+  Stream<QuerySnapshot> get users {
+    return userCollection.snapshots();
+  }
+
+  Future getCurrentUserData() async {
+    User user = FirebaseAuth.instance.currentUser;
+    try {
+      DocumentSnapshot ds = await userCollection.doc(user.uid).get();
+      setState(() {
+        // _selectedReligion = ds.get('religion');
+        _selectedGender = ds.get('gender');
+        _selectedHeight = ds.get('height');
+        _selectedWeight = ds.get('weight');
+        _selectedAge = ds.get('age');
+        // _relegionNotification = ds.get('relegiousnotification');
+        // _bmi = ds.get('bmi');
+      });
+    } catch (e) {
+      print(
+          '${e.toString()}asddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd');
+    }
+  }
+
   Widget genderSelection(BuildContext context) {
     double totalHeight = MediaQuery.of(context).size.height;
     double totalWidth = MediaQuery.of(context).size.width;
@@ -43,7 +74,6 @@ class _BMIDataCollectionState extends State<BMIDataCollection> {
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Select Gender'),
         GestureDetector(
           onTap: () => setState(() => _selectedGender = 'Male'),
           child: Container(
@@ -101,6 +131,53 @@ class _BMIDataCollectionState extends State<BMIDataCollection> {
     ));
   }
 
+  _handleValueChanged(num value) {
+    if (value != null) {
+      //`setState` will notify the framework that the internal state of this object has changed.
+      if (value is int) {
+        setState(() => _selectedAge = value);
+      } else {
+        setState(() => _selectedAge = value);
+      }
+    }
+  }
+
+  _handleValueChangedExternally(num value) {
+    if (value != null) {
+      if (value is int) {
+        setState(() => _selectedAge = value);
+        integerNumberPicker.animateInt(value);
+      } else {
+        setState(() => _selectedAge = value);
+        decimalNumberPicker.animateDecimalAndInteger(value);
+      }
+    }
+  }
+
+  Widget ageCard(BuildContext context) {
+    return new Center(
+      child: new Column(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ageiconChanger(_selectedAge, _selectedGender),
+              new NumberPicker.integer(
+                initialValue: _selectedAge,
+                minValue: 10,
+                maxValue: 100,
+                onChanged: (newValue) => setState(
+                  () => _selectedAge = newValue,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double totalHeight = MediaQuery.of(context).size.height;
@@ -124,16 +201,6 @@ class _BMIDataCollectionState extends State<BMIDataCollection> {
       ),
       body: Center(
           child: new Column(children: <Widget>[
-        // Card(
-        //     child: Container(
-        //         padding: EdgeInsets.all(5),
-        //         child:
-        //             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        //           Text(
-        //             "Body Mass Index(BMI)",
-        //             style: TextStyle(fontSize: 15, fontFamily: 'Poppins'),
-        //           ),
-        //         ]))),
         new Column(
           children: <Widget>[
             Container(
@@ -224,33 +291,38 @@ class _BMIDataCollectionState extends State<BMIDataCollection> {
                   },
                 )),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text('Select Gender'),
+                Text('Select Age'),
+              ],
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 genderSelection(context),
                 ageiconChanger(_selectedAge, _selectedGender),
                 Column(
                   children: [
-                    Text('Select Age'),
                     new NumberPicker.integer(
                       initialValue: _selectedAge,
                       minValue: 10,
                       maxValue: 100,
-                      onChanged: (newValue) => setState(
-                        () => _selectedAge = newValue,
-                      ),
+                      infiniteLoop: false,
+                      onChanged: _handleValueChanged,
                     ),
                   ],
-                )
+                ),
               ],
             ),
             SizedBox(
-              height: totalHeight * .02,
+              height: totalHeight * .03,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () => Navigator.pop(context),
                   child: Text('Close'),
                 ),
                 FlatButton(
@@ -304,7 +376,7 @@ class LineTitles {
           getTextStyles: (value) => const TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
           getTitles: (value) {
-            print(value);
+            // print(value);
             switch (value.toInt()) {
               case 11:
                 return 'Under';
