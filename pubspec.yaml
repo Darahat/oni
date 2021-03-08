@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   
-  
+  rive: ^0.6.8
   convex_bottom_bar: ^2.6.0
   weather: ^1.2.4
   geolocator: ^6.1.13
@@ -53,6 +53,7 @@ dependencies:
   workmanager: ^0.2.3
   fl_chart: ^0.12.2
   flutter_icons: ^1.1.0
+ 
 ev_dependencies:
   flutter_test:
     sdk: flutter
@@ -70,6 +71,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/animation/jogging.riv
+    - assets/animation/nextbutton.riv
     - assets/images/navbar_top_image.jpg
     - assets/icons/up.png
     - assets/icons/logout.png

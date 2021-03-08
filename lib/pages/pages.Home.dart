@@ -1,22 +1,14 @@
 //Home page
 import 'dart:async';
-import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:oni/componentsOfPages/homewidgets/bodyStrucCard.dart';
-import 'package:oni/componentsOfPages/homewidgets/draggabaleNav.dart';
 import 'package:oni/componentsOfPages/homewidgets/activity_card.dart';
 import 'package:oni/componentsOfPages/homewidgets/weather_card.dart';
 import 'package:oni/pages/pages.personalize.dart';
-import 'package:weather/weather.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-
 import 'package:flutter_icons/flutter_icons.dart';
-
-import 'package:oni/provider/google_sign_in.dart';
-
-import 'package:provider/provider.dart';
 
 class OniHome extends StatefulWidget {
   OniHome({
@@ -58,12 +50,12 @@ class _OniHomeState extends State<OniHome> {
     return Scaffold(
       bottomNavigationBar: ConvexAppBar(
         color: Colors.white,
-        backgroundColor: Colors.green,
+        backgroundColor: Color(0xff3F3D56),
         items: [
           TabItem(icon: Icons.home, title: 'Home'),
           TabItem(icon: Ionicons.ios_person, title: 'Profile'),
           // TabItem(icon: Icons.mic, title: 'Speak'),
-          TabItem(icon: Icons.message, title: 'Message'),
+
           TabItem(icon: Icons.logout, title: 'Logout'),
         ],
         initialActiveIndex: 0, //optional, default as 0
@@ -78,13 +70,7 @@ class _OniHomeState extends State<OniHome> {
                       fitnessSwitchValue: fitnessSwitchValue,
                       weatherSwitchValue: weatherSwitchValue),
                 ));
-          } else if (i == 4) {
-//               final provider =StreamProvider(
-//   create: (_) => FirebaseAuth.instance.onAuthStateChanged,
-// ),
-//                   StreamProvider.of<GoogleSignInProvider>(context, listen: false);
-//               provider.logout();
-          }
+          } else if (i == 4) {}
         },
       ),
       appBar: AppBar(

@@ -81,13 +81,13 @@ class _BodyStrucInfoState extends State<BodyStrucInfo> {
                                   children: [
                                     Icon(
                                       Ionicons.ios_speedometer,
-                                      color: Colors.blue,
+                                      color: Color(0xff6C63FF),
                                       size: 18,
                                     ),
                                     Text(
                                       ' Weight',
                                       style: TextStyle(
-                                          color: Colors.blue,
+                                          color: Color(0xff6C63FF),
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -110,7 +110,7 @@ class _BodyStrucInfoState extends State<BodyStrucInfo> {
                                 Text(
                                   ' Height',
                                   style: TextStyle(
-                                      color: Colors.blue,
+                                      color: Color(0xff6C63FF),
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.bold),
                                 ),
