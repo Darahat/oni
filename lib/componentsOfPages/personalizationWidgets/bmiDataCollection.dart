@@ -5,6 +5,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:oni/componentsOfPages/personalizationWidgets/personalizingFunctions.dart';
 import 'package:flutter/services.dart';
+import 'package:oni/pages/getWeight.dart';
 import 'package:rive/rive.dart';
 
 class BMIDataCollection extends StatefulWidget {
@@ -275,9 +276,17 @@ class _BMIDataCollectionState extends State<BMIDataCollection> {
     double totalHeight = MediaQuery.of(context).size.height;
     double totalWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+        appBar: AppBar(
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(
-            height: totalHeight / 4.5,
+            height: totalHeight / 10,
           ),
           Container(
             height: totalHeight / 2.5,
@@ -318,22 +327,21 @@ class _BMIDataCollectionState extends State<BMIDataCollection> {
             ),
           )
         ]),
-        floatingActionButton: FlatButton(
+        floatingActionButton: FloatingActionButton(
             onPressed: () {
               setState(() {
                 isPlaying = 'Move';
               });
               animation(isPlaying);
               Future.delayed(Duration(milliseconds: 1000), () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => BMIDataCollection()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => GetWeightPage()));
               });
             },
+            backgroundColor: Colors.green,
             child: Container(
               height: 50.0,
-              width: 40.0,
+              width: 50.0,
               child: _riveArtboardforbackbutton == null
                   ? const SizedBox()
                   : Rive(

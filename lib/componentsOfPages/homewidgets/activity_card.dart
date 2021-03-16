@@ -98,12 +98,12 @@ class _ActivityCardState extends State<ActivityCard> {
                                 Icon(
                                   Icons.directions_walk,
                                   size: 25,
-                                  color: Color(0xff6C63FF),
+                                  color: Color(0xff4CAF50),
                                 ),
                                 Text(
                                   'Steps',
                                   style: TextStyle(
-                                    color: Color(0xff6C63FF),
+                                    color: Color(0xff4CAF50),
                                   ),
                                 )
                               ],

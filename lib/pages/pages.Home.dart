@@ -50,7 +50,7 @@ class _OniHomeState extends State<OniHome> {
     return Scaffold(
       bottomNavigationBar: ConvexAppBar(
         color: Colors.white,
-        backgroundColor: Color(0xff3F3D56),
+        backgroundColor: Color(0xff4CAF50),
         items: [
           TabItem(icon: Icons.home, title: 'Home'),
           TabItem(icon: Ionicons.ios_person, title: 'Profile'),
@@ -74,9 +74,6 @@ class _OniHomeState extends State<OniHome> {
         },
       ),
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.black, //change your color here
-        ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
