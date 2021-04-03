@@ -86,7 +86,7 @@ class _GetWeightPageState extends State<GetWeightPage> {
     return Scaffold(
         appBar: AppBar(
           leading: new IconButton(
-            icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
+            icon: new Icon(Icons.clear, color: Colors.white),
             onPressed: () => Navigator.of(context).pop(),
           ),
           backgroundColor: Colors.transparent,
@@ -153,7 +153,6 @@ class _GetWeightPageState extends State<GetWeightPage> {
                 ),
               ),
             ]),
-
             Container(
               height: totalHeight / 4,
 
@@ -180,7 +179,7 @@ class _GetWeightPageState extends State<GetWeightPage> {
                   value: _selectedWeight,
                   min: 30,
                   max: 150,
-                  divisions: 100,
+                  divisions: 150,
                   label: _selectedWeight.round().toString(),
                   onChanged: (double value) {
                     setState(() {
@@ -189,9 +188,9 @@ class _GetWeightPageState extends State<GetWeightPage> {
                     animationFunction(_selectedWeight);
                   },
                 )),
-            // SizedBox(
-            //   height: totalHeight / 5,
-            // ),
+            SizedBox(
+              height: totalHeight / 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -220,7 +219,7 @@ class _GetWeightPageState extends State<GetWeightPage> {
                   child: TextButton(
                       onPressed: () {},
                       child: Text(
-                        'Skip',
+                        'back',
                         style: TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: 16,
