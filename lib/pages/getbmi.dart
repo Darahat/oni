@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:oni/componentsOfPages/personalizationWidgets/bmiDataCollection.dart';
 import 'package:rive/rive.dart';
 import 'package:oni/pages/getHeight.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class GetBMIPage extends StatefulWidget {
-  GetBMIPage({Key key}) : super(key: key);
-
+  GetBMIPage({Key key, this.selectedWeight, this.selectedHeight})
+      : super(key: key);
+  final double selectedWeight;
+  final double selectedHeight;
   @override
   _GetBMIPageState createState() => _GetBMIPageState();
 }
@@ -24,28 +28,19 @@ class _GetBMIPageState extends State<GetBMIPage> {
 
     // Load the animation file from the bundle, note that you could also
     // download this. The RiveFile just expects a list of bytes.
-    rootBundle.load('assets/animation/jogging.riv').then(
-      (data) async {
-        final file = RiveFile();
-
-        // Load the RiveFile from the binary data.
-        if (file.import(data)) {
-          // The artboard is the root of the animation and gets drawn in the
-          // Rive widget.
-          final artboard = file.mainArtboard;
-          // Add a controller to play back a known animation on the main/default
-          // artboard.We store a reference to it so we can toggle playback.
-          artboard.addController(_controller = SimpleAnimation('idle'));
-          setState(() => _riveArtboard = artboard);
-        }
-      },
-    );
   }
 
-  Artboard _riveArtboard;
+  double calculatedBMI;
+  final List<Color> gradientColor = [
+    const Color(0xff23b6e6),
+    const Color(0xff02d39a),
+  ];
   RiveAnimationController _controller;
+
   @override
   Widget build(BuildContext context) {
+    var feetTometer = (widget.selectedHeight * 0.3048);
+    calculatedBMI = widget.selectedWeight / (feetTometer * feetTometer);
     double totalHeight = MediaQuery.of(context).size.height;
     double totalWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -67,7 +62,7 @@ class _GetBMIPageState extends State<GetBMIPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'What is your ',
+                  'What is your $feetTometer  $calculatedBMI',
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     fontSize: 20,
@@ -75,7 +70,7 @@ class _GetBMIPageState extends State<GetBMIPage> {
                   ),
                 ),
                 Text(
-                  'Weight?',
+                  'BMI?',
                   style: TextStyle(
                       fontFamily: 'Poppins',
                       fontSize: 20,
@@ -96,48 +91,108 @@ class _GetBMIPageState extends State<GetBMIPage> {
                 ),
               ),
             ),
-            SizedBox(
-              height: totalHeight / 1.8,
+            // SizedBox(
+            //   height: totalHeight / 1.8,
+            // ),
+            Container(
+              padding: EdgeInsets.all(10),
+              margin: EdgeInsets.only(top: 5),
+              height: totalHeight * .3,
+              child: LineChart(
+                LineChartData(
+                    axisTitleData: FlAxisTitleData(
+                        show: true,
+                        leftTitle: AxisTitle(
+                            showTitle: true,
+                            titleText: 'Weight(KG)',
+                            textAlign: TextAlign.center,
+                            textStyle: TextStyle(
+                                color: Colors.white54,
+                                fontFamily: 'Poppins',
+                                fontSize: 12))),
+                    clipData: FlClipData.all(),
+                    backgroundColor: Colors.black,
+                    minY: 0,
+                    maxY: 180,
+                    minX: 10,
+                    maxX: 32,
+                    titlesData: LineTitles.getTitleData(),
+                    borderData: FlBorderData(
+                      show: true,
+                      border:
+                          Border.all(color: const Color(0xff37434d), width: 3),
+                    ),
+                    gridData: FlGridData(
+                      show: true,
+                      getDrawingHorizontalLine: (value) {
+                        return FlLine(
+                          color: const Color(0xff37434d),
+                        );
+                      },
+                    ),
+                    lineBarsData: [
+                      LineChartBarData(
+                          spots: [
+                            FlSpot(10, 0),
+                            FlSpot(calculatedBMI, widget.selectedWeight)
+                          ],
+                          isCurved: true,
+                          barWidth: 2,
+                          colors: gradientColor,
+                          belowBarData: BarAreaData(
+                            show: true,
+                            colors: gradientColor
+                                .map((color) => color.withOpacity(.3))
+                                .toList(),
+                          ))
+                    ]),
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                FlatButton(
-                  padding: EdgeInsets.fromLTRB(
-                      totalWidth / 11, 5, totalWidth / 11, 5),
-                  color: Colors.green,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                      side: BorderSide(color: Colors.lightGreen)),
-                  splashColor: Colors.green,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => GetHeightPage()));
-                  },
-                  child: Icon(
-                    Icons.trending_flat,
-                    color: Colors.white,
-                    size: 40,
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(25, 10, 25, 5),
-                  child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Skip',
-                        style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      )),
-                )
-              ],
-            )
+//
+//
+//
+//
+//
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.end,
+            //   children: [
+            //     FlatButton(
+            //       padding: EdgeInsets.fromLTRB(
+            //           totalWidth / 11, 5, totalWidth / 11, 5),
+            //       color: Colors.green,
+            //       shape: RoundedRectangleBorder(
+            //           borderRadius: BorderRadius.circular(25.0),
+            //           side: BorderSide(color: Colors.lightGreen)),
+            //       splashColor: Colors.green,
+            //       onPressed: () {
+            //         Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //                 builder: (context) => GetHeightPage()));
+            //       },
+            //       child: Icon(
+            //         Icons.trending_flat,
+            //         color: Colors.white,
+            //         size: 40,
+            //       ),
+            //     ),
+            //     Container(
+            //       padding: EdgeInsets.fromLTRB(25, 10, 25, 5),
+            //       child: TextButton(
+            //           onPressed: () {},
+            //           child: Text(
+            //             'Skip',
+            //             style: TextStyle(
+            //                 fontFamily: 'Poppins',
+            //                 fontSize: 16,
+            //                 fontWeight: FontWeight.bold),
+            //           )),
+            //     )
+            //   ],
+            // )
           ],
         ));
+
     // return Container(
     //     height: totalHeight / 2,
     //     child: Column(

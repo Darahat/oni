@@ -206,7 +206,8 @@ class _GetWeightPageState extends State<GetWeightPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => GetHeightPage()));
+                            builder: (context) => GetHeightPage(
+                                selectedWeight: _selectedWeight)));
                   },
                   child: Icon(
                     Icons.trending_flat,

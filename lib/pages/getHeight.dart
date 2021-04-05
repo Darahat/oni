@@ -4,15 +4,19 @@ import 'package:oni/componentsOfPages/customslider.dart';
 import 'package:oni/pages/getAge.dart';
 import 'package:rive/rive.dart';
 
+import 'getbmi.dart';
+
 class GetHeightPage extends StatefulWidget {
   // GetHeightPage({Key key}) : super(key: key);
   final double sliderHeight;
   final int min;
   final int max;
   final fullWidth;
+  final selectedWeight;
 
   GetHeightPage(
-      {this.sliderHeight = 48,
+      {this.selectedWeight,
+      this.sliderHeight = 48,
       this.max = 10,
       this.min = 0,
       this.fullWidth = false});
@@ -240,8 +244,14 @@ class _GetHeightPageState extends State<GetHeightPage> {
                       side: BorderSide(color: Colors.lightGreen)),
                   splashColor: Colors.green,
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => GetAgePage()));
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) => GetAgePage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => GetBMIPage(
+                                selectedWeight: widget.selectedWeight,
+                                selectedHeight: _selectedHeight)));
                   },
                   child: Icon(
                     Icons.trending_flat,
